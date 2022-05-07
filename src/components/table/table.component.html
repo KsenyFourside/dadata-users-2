@@ -1,0 +1,58 @@
+<div
+  class="container mx-auto mt-12 relative overflow-x-auto shadow-md sm:rounded-lg"
+>
+  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <thead
+      class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+    >
+      <tr>
+        <th scope="col" class="px-6 py-3">
+          <span class="sr-only"></span>
+        </th>
+        <th scope="col" class="px-6 py-3">Фамилия</th>
+        <th scope="col" class="px-6 py-3">Имя</th>
+        <th scope="col" class="px-6 py-3">Отчество</th>
+        <th scope="col" class="px-6 py-3">Адрес</th>
+        <th scope="col" class="px-6 py-3">
+          <span class="sr-only"></span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+        *ngFor="let user of users; index as i"
+      >
+        <th
+          class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap"
+        >
+          {{ i + 1 }}
+        </th>
+        <th
+          class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap"
+        >
+          {{ user.lastName }}
+        </th>
+        <td class="px-6 py-4">{{ user.firstName }}</td>
+        <td class="px-6 py-4">{{ user.middleName }}</td>
+        <td class="px-6 py-4">
+          {{ user.address }}
+        </td>
+        <td class="px-6 py-4 text-right">
+          <a
+            href="#"
+            class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+            (click)="changeModalVisibility(true, user)"
+            >Редактировать</a
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<app-modal
+  (changeModalVisibility)="changeModalVisibility(false, null)"
+  [isModalVisible]="isModalVisible"
+  (saveForm)="changeUser($event)"
+  [user]="selectedUser"
+></app-modal>
